@@ -1,0 +1,15 @@
+
+
+@mixin text-signup($d: flex, $ai: center) {
+    display: $d;
+    align-items: $ai;
+  }
+
+.header {
+    padding: 32px;
+    @include text-signup();
+    justify-content: space-between;
+    background-color: black;
+    height: 32px;
+  }
+  
