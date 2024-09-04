@@ -1,17 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Observable, catchError, lastValueFrom, throwError } from 'rxjs';
+import { lastValueFrom } from 'rxjs';
 import { environment } from '../../environments/environments';
-import {
-  HttpClient,
-  HttpErrorResponse,
-  HttpEvent,
-  HttpHandler,
-  HttpHeaders,
-  HttpInterceptor,
-  HttpRequest,
-} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-
 
 @Injectable({
   providedIn: 'root',

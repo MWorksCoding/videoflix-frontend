@@ -1,3 +1,65 @@
 <app-header></app-header>
-<p>login works!</p>
+<div class="login-card" [@fadeInOut]>
+    <mat-card class="login-card-div">
+  
+        <mat-card-header class="m-32">
+          <mat-card-title class="login-headline p-32">Log in</mat-card-title>
+        </mat-card-header>
+        <div class="login-input-fields">
+          <mat-form-field>
+            <mat-label>Username</mat-label>
+            <input
+              matInput
+              type="text"
+              name="username"
+              [(ngModel)]="username"
+              required
+              placeholder="Please enter your email adress"
+              title="Please enter your email adress"
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Password</mat-label>
+            <input
+              matInput
+              type="password"
+              name="password"
+              [(ngModel)]="password"
+              required
+              placeholder="Please enter your password"
+              title="Please enter your password"
+            />
+          </mat-form-field>
+        </div>
+        <div class="login-input-fields" style="padding: 0px 16px 16px 16px">
+          <mat-checkbox class="remember-me" [checked]="rememberMe">Remember me</mat-checkbox>
+          <span class="forgot-password-text" 
+            >Forgot my password</span
+          >
+        </div>
+        <mat-card-actions>
+          <button
+            mat-raised-button
+            color="primary"
+            type="submit"
+            class="submit-button"
+          >
+            Login
+          </button>
+          <button
+            mat-raised-button
+            color="primary"
+            type="submit"
+            class="guest-button"
+          >
+            Guest Login
+          </button>
+        </mat-card-actions>
+      <div class="warning-message">
+        <!-- @if (failedLogin) {
+        <div>Login failed, please try again!</div>
+        } -->
+      </div>
+    </mat-card>
+  </div>
 <app-footer></app-footer>

@@ -1,0 +1,19 @@
+:host {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 48px;
+  position: sticky;
+  bottom: 0px;
+  height: 108px;
+
+  span {
+    color: #FFFFFF;
+  }
+}

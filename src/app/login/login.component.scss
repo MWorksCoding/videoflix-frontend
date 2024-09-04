@@ -1,0 +1,54 @@
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: 
+    linear-gradient(180deg, rgba(0, 0, 0, 0.8) -27.44%, rgba(0, 0, 0, 0.44) 44.23%, rgba(0, 0, 0, 0.8) 100%),
+    url("../../assets/img/bg-login.jpeg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+@mixin text-signup($d: flex, $ai: center) {
+  display: $d;
+  align-items: $ai;
+}
+
+.login-input-fields {
+  @include text-signup();
+  justify-content: space-evenly;
+  padding: 16px 16px 0 16px;
+  gap: 16px;
+}
+
+.menu-bar {
+  @include text-signup();
+  gap: 16px;
+  justify-content: space-between;
+}
+
+.login-card {
+  display: flex;
+  justify-content: center;
+  transition: opacity 0.5 ease-in-out;
+}
+
+.mat-mdc-card-header {
+  flex-direction: column;
+}
+
+.mat-mdc-card-actions {
+  justify-content: center;
+  padding: 0px 16px 16px 16px;
+}
+
+::ng-deep .mat-mdc-card-header-text {
+  @include text-signup();
+  flex-direction: column;
+}

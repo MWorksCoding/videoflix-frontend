@@ -1,4 +1,8 @@
-
+:host {
+  position: fixed;
+    top: 0;
+    width: 100%;
+}
 
 @mixin text-signup($d: flex, $ai: center) {
     display: $d;
@@ -6,10 +10,13 @@
   }
 
 .header {
-    padding: 32px;
+    padding: 0 32px;
     @include text-signup();
     justify-content: space-between;
-    background-color: black;
-    height: 32px;
+    background-color: transparent;
+    height: 108px;
   }
   
+  .text-signup {
+    display: flex;
+  }
