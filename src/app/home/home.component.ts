@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { HeaderComponent } from '../shared/header/header.component';
-import { FooterComponent } from '../shared/footer/footer.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -16,7 +14,6 @@ import {
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import {
   animate,
@@ -25,8 +22,8 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
-import { HttpClient } from '@angular/common/http';
 import {ErrorStateMatcher} from '@angular/material/core';
+import { CommonService } from '../services/common.service';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -40,8 +37,6 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   selector: 'app-home',
   standalone: true,
   imports: [
-    HeaderComponent,
-    FooterComponent,
     MatCardModule,
     MatButtonModule,
     MatFormFieldModule,
@@ -71,6 +66,13 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class HomeComponent {
 
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
-
   matcher = new MyErrorStateMatcher();
+
+  constructor(
+    public common: CommonService
+  ) {}
+
+  ngOnInit(): void {
+    this.common.component = "home";
+  }
 }

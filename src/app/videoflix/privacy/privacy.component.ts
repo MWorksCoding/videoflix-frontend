@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CommonService } from '../../services/common.service';
 
 @Component({
   selector: 'app-privacy',
@@ -8,5 +9,11 @@ import { Component } from '@angular/core';
   styleUrl: './privacy.component.scss'
 })
 export class PrivacyComponent {
+  constructor(
+    public common: CommonService
+  ) {}
 
+  ngOnInit(): void {
+    this.common.component = "imprint-privacy";
+  }
 }

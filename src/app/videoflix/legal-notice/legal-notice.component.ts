@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CommonService } from '../../services/common.service';
 
 @Component({
   selector: 'app-legal-notice',
@@ -9,4 +10,11 @@ import { Component } from '@angular/core';
 })
 export class LegalNoticeComponent {
 
+  constructor(
+    public common: CommonService
+  ) {}
+
+  ngOnInit(): void {
+    this.common.component = "imprint-privacy";
+  }
 }

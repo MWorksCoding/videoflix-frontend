@@ -1,8 +1,27 @@
 <div class="header">
-    <div>
-      <img alt="Logo" src="../../../assets/img/Logo.svg">
-    </div>
-    <div class="text-signup" [@fadeInOut]>
-      <button mat-flat-button>Log In</button>
-    </div>
+  <div>
+    <img alt="Logo" src="../../../assets/img/Logo.svg" />
   </div>
+  @if (common.component == "home") {
+  <div class="text-signup" [@fadeInOut]>
+    <button mat-flat-button (click)="redirectToLogin()">Log In</button>
+  </div>
+  } @if (common.component == "logout") {
+  <div class="text-signup" [@fadeInOut]>
+    <button mat-flat-button (click)="redirectToLogin()">
+      <mat-icon
+        aria-hidden="false"
+        fontIcon="logout"
+      ></mat-icon
+      >Log Out
+    </button>
+  </div>
+  } @if (common.component == "imprint-privacy") {
+    <div class="text-signup" [@fadeInOut]>
+        <mat-icon (click)="redirectToLogin()"
+          aria-hidden="false"
+          fontIcon="arrow_back"
+        ></mat-icon>
+    </div>
+    }
+</div>

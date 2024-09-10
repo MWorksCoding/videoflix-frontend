@@ -14,30 +14,32 @@ export const routes: Routes = [
     { path: 'login-help', component: LoginHelpComponent },
     { path: 'register', component: RegisterComponent },
     { path: 'logout', component: LogoutComponent },
-    {
-        path: 'videoflix', component: HomeComponent,
-        children: [
-            {
-                path: '',
-                redirectTo: 'home',
-                pathMatch: 'full'
-            },
-            {
-                path: 'home',
-                component: HomeComponent
-            },
-            {
-                path: 'legal-notice',
-                component: LegalNoticeComponent
-            },
-            {
-                path: 'privacy',
-                component: PrivacyComponent
-            },
-            {
-                path: 'user-settings',
-                component: UserSettingsComponent
-            }
-        ]
-    },
+    { path: 'legal-notice', component: LegalNoticeComponent },
+    { path: 'privacy', component: PrivacyComponent },
+    // {
+    //     path: 'videoflix', component: HomeComponent,
+    //     children: [
+    //         {
+    //             path: '',
+    //             redirectTo: 'home',
+    //             pathMatch: 'full'
+    //         },
+    //         {
+    //             path: 'home',
+    //             component: HomeComponent
+    //         },
+    //         {
+    //             path: 'legal-notice',
+    //             component: LegalNoticeComponent
+    //         },
+    //         {
+    //             path: 'privacy',
+    //             component: PrivacyComponent
+    //         },
+    //         {
+    //             path: 'user-settings',
+    //             component: UserSettingsComponent
+    //         }
+    //     ]
+    // },
 ];

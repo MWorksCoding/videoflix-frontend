@@ -1,65 +1,49 @@
-<app-header></app-header>
 <div class="login-card" [@fadeInOut]>
-    <mat-card class="login-card-div">
-  
-        <mat-card-header class="m-32">
-          <mat-card-title class="login-headline p-32">Log in</mat-card-title>
-        </mat-card-header>
-        <div class="login-input-fields">
-          <mat-form-field>
-            <mat-label>Username</mat-label>
-            <input
-              matInput
-              type="text"
-              name="username"
-              [(ngModel)]="username"
-              required
-              placeholder="Please enter your email adress"
-              title="Please enter your email adress"
-            />
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Password</mat-label>
-            <input
-              matInput
-              type="password"
-              name="password"
-              [(ngModel)]="password"
-              required
-              placeholder="Please enter your password"
-              title="Please enter your password"
-            />
-          </mat-form-field>
-        </div>
-        <div class="login-input-fields" style="padding: 0px 16px 16px 16px">
-          <mat-checkbox class="remember-me" [checked]="rememberMe">Remember me</mat-checkbox>
-          <span class="forgot-password-text" 
-            >Forgot my password</span
-          >
-        </div>
-        <mat-card-actions>
-          <button
-            mat-raised-button
-            color="primary"
-            type="submit"
-            class="submit-button"
-          >
-            Login
-          </button>
-          <button
-            mat-raised-button
-            color="primary"
-            type="submit"
-            class="guest-button"
-          >
-            Guest Login
-          </button>
-        </mat-card-actions>
-      <div class="warning-message">
-        <!-- @if (failedLogin) {
-        <div>Login failed, please try again!</div>
-        } -->
+  <mat-card class="login-card-div">
+    <mat-card-header class="centered-headline">
+      <mat-card-title class="login-headline">Log in</mat-card-title>
+    </mat-card-header>
+    <div class="login-input-fields">
+      <mat-form-field>
+        <mat-label>Email Address</mat-label>
+        <input type="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
+               placeholder="Ex. pat@example.com">
+        @if (emailFormControl.hasError('email') && !emailFormControl.hasError('required')) {
+          <mat-error>Please enter a valid email address</mat-error>
+        }
+        @if (emailFormControl.hasError('required')) {
+          <mat-error>Email is <strong>required</strong></mat-error>
+        }
+      </mat-form-field>
+    </div>
+    <div class="login-input-fields">
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          type="password"
+          name="password"
+          [(ngModel)]="password"
+          required
+          placeholder="Please enter your password"
+          title="Please enter your password"
+        />
+      </mat-form-field>
+    </div>
+    <mat-checkbox class="remember-me" [checked]="rememberMe"
+      >Remember me</mat-checkbox
+    >
+    <div class="button-links">
+      <mat-card-actions>
+        <button mat-raised-button type="submit" class="submit-button">
+          Login
+        </button>
+      </mat-card-actions>
+      <a [routerLink]="'/login-help'" mat-tab-link> Forgot password? </a>
+      <div class="span-link">
+        <span> New to Videoflix?</span>
+        <a [routerLink]="'/register'" mat-tab-link> Sign Up now</a>
       </div>
-    </mat-card>
-  </div>
-<app-footer></app-footer>
+    </div>
+  </mat-card>
+</div>

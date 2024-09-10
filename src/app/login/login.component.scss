@@ -7,48 +7,74 @@
   bottom: 0;
   right: 0;
   left: 0;
-  background: 
-    linear-gradient(180deg, rgba(0, 0, 0, 0.8) -27.44%, rgba(0, 0, 0, 0.44) 44.23%, rgba(0, 0, 0, 0.8) 100%),
+  background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.8) -27.44%,
+      rgba(0, 0, 0, 0.44) 44.23%,
+      rgba(0, 0, 0, 0.8) 100%
+    ),
     url("../../assets/img/bg-login.jpeg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
-@mixin text-signup($d: flex, $ai: center) {
-  display: $d;
-  align-items: $ai;
-}
-
-.login-input-fields {
-  @include text-signup();
-  justify-content: space-evenly;
-  padding: 16px 16px 0 16px;
-  gap: 16px;
-}
-
-.menu-bar {
-  @include text-signup();
-  gap: 16px;
-  justify-content: space-between;
-}
-
 .login-card {
   display: flex;
   justify-content: center;
-  transition: opacity 0.5 ease-in-out;
 }
 
-.mat-mdc-card-header {
-  flex-direction: column;
+.login-card-div {
+  width: Fixed (520px) px;
+  height: Hug (505px) px;
+  padding: 43px 56px 43px 56px;
+  border-radius: 48px;
+  opacity: 0px;
 }
 
-.mat-mdc-card-actions {
+.login-headline {
+  color: #2e3edf;
+  font-size: 48px;
+  height: 64px;
+}
+
+.centered-headline {
+  display: flex;
   justify-content: center;
-  padding: 0px 16px 16px 16px;
+  align-items: center;
 }
 
-::ng-deep .mat-mdc-card-header-text {
-  @include text-signup();
+.login-input-fields {
+  width: 100%;
+}
+
+::ng-deep .mat-mdc-form-field-infix {
+  width: 408px !important;
+}
+
+.button-links {
+  display: flex;
   flex-direction: column;
+  gap: 16px;
+  align-items: center;
+
+  a {
+    color: #2e3edf;
+    font-size: 18px;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  span {
+    color: #000000;
+    font-size: 18px;
+  }
+
+  div{
+    display: flex;
+    gap: 16px;
+  }
+}
+
+.submit-button{
+  color: #FFFFFF !important;
 }
