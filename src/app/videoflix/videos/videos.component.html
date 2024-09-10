@@ -1,0 +1,37 @@
+<div class="videos">
+  <h3>Breakout</h3>
+  <span>
+    Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit
+    Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen.
+    Personenbezogene Daten sind alle Daten, mit denen Sie persönlich
+    identifiziert werden können. </span
+  ><br /><br />
+  <button mat-flat-button>
+    <mat-icon aria-hidden="false" fontIcon="play_arrow"></mat-icon>Play
+  </button>
+</div>
+<div class="videos-list">
+  <mat-list>
+    <div mat-subheader>Folders</div>
+    <div class="vertical">
+      @for (folder of folders; track folder) {
+      <mat-list-item>
+        <mat-icon matListItemIcon>folder</mat-icon>
+        <div matListItemTitle>{{ folder.name }}</div>
+        <div matListItemLine>{{ folder.updated | date }}</div>
+      </mat-list-item>
+      }
+    </div>
+    <mat-divider></mat-divider>
+    <div mat-subheader>Notes</div>
+    <div class="vertical">
+      @for (note of notes; track note) {
+      <mat-list-item>
+        <mat-icon matListItemIcon>note</mat-icon>
+        <div matListItemTitle>{{ note.name }}</div>
+        <div matListItemLine>{{ note.updated | date }}</div>
+      </mat-list-item>
+      }
+    </div>
+  </mat-list>
+</div>

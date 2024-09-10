@@ -87,4 +87,8 @@ export class LoginComponent {
     this.common.component = "login";
   }
 
+  login() {
+    this.router.navigateByUrl('/videos');
+  }
+
 }

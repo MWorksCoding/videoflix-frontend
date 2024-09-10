@@ -1,0 +1,41 @@
+:host {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: black;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+h3,h4{
+    color: #FFFFFF;
+}
+span {
+    color: #FFFFFF;
+}
+.videos{
+    display: flex;
+    flex-direction: column;
+    margin: 128px 32px 0px 32px;
+    width: 30vw;
+}
+button{
+    width: 120px;
+}
+
+.videos-list{
+    display: flex;
+    flex-direction: column;
+    margin: 0px 32px 0px 32px;
+    width: 30vw;
+    div {
+        color: #FFFFFF;
+    }
+}
+
+.vertical{
+    display: flex !important;
+}
