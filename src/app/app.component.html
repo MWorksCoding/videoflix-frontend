@@ -1,3 +1,12 @@
+@if (common.loading) {
+<div class="loading-screen">
+  <div class="loading-screen-center">
+    <mat-spinner [color]="spinner_color"></mat-spinner>
+    <span class="loading-screen-text">Loading</span>
+  </div>
+</div>
+}
+<mat-spinner></mat-spinner>
 <app-header></app-header>
 <router-outlet />
 <app-footer></app-footer>

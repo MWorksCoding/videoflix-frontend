@@ -3,3 +3,12 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 button {background: #2E3EDF !important;}
+
+
+:root {
+    --mdc-circular-progress-active-indicator-color: #2E3EDF;
+    --mdc-snackbar-container-color: #2E3EDF;
+    --mat-text-button-touch-target-display: #FFFFFF;
+    --mdc-snackbar-supporting-text-color: #FFFFFF;
+    --mat-snack-bar-button-color: #FFFFFF;
+  }

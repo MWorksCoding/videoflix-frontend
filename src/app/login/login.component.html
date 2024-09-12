@@ -6,8 +6,8 @@
     <div class="login-input-fields">
       <mat-form-field>
         <mat-label>Email Address</mat-label>
-        <input type="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
-               placeholder="Ex. pat@example.com">
+        <input type="email" matInput [(ngModel)]="email" [formControl]="emailFormControl" [errorStateMatcher]="matcher"
+               placeholder="">
         @if (emailFormControl.hasError('email') && !emailFormControl.hasError('required')) {
           <mat-error>Please enter a valid email address</mat-error>
         }
