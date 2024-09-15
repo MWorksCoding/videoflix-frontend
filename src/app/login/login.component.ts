@@ -104,7 +104,7 @@ export class LoginComponent {
   async login() {
     this.common.loading = true;
     try {
-      let resp: any = await this.auth.loginWithUsernameAndPassword(
+      let resp: any = await this.auth.loginWithEmailAndPassword(
         this.email,
         this.password
       );

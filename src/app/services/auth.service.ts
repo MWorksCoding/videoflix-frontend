@@ -12,16 +12,16 @@ export class AuthService {
   error: string = '';
 
   /**
-   * Logs in a user with the provided username and password.
-   * @param username The username of the user.
+   * Logs in a user with the provided email and password.
+   * @param email The email of the user.
    * @param password The password of the user.
    * @returns HTTP response after logging in.
    */
-  public loginWithUsernameAndPassword(username: string, password: string) {
+  public loginWithEmailAndPassword(email: string, password: string) {
 
     const url = environment.baseUrl + '/login/';
     const body = {
-      username: username,
+      username: email,
       password: password,
     };
     return lastValueFrom(this.http.post(url, body));
