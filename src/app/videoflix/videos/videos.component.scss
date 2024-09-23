@@ -1,14 +1,14 @@
 :host {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    background: black;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: black;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 
 // h3,h4{
 //     color: #FFFFFF;
@@ -26,89 +26,88 @@
 //     width: 120px;
 // }
 
-
 .videos {
-    width: 100vw; /* Full width of the viewport */
-    height: 33vh; /* One-third of the viewport height */
-    background-size: cover; /* Ensures the image covers the entire div */
-    background-position: center; /* Center the image */
-    background-repeat: no-repeat; /* Prevent repeating the image */
+  width: 100vw; 
+  height: 50vh; 
+  background-size: cover; 
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+
+  .content-overlay {
+    text-align: left;
+    color: white;
+    padding: 128px 32px 0px 32px;
+    width: 33%;
+    color: #ffffff;
+  }
+
+  h3,
+  span {
+    margin: 0;
+    padding: 0;
+    color: #ffffff;
+  }
+
+  button {
+    width: 120px;
+  }
+}
+
+.full-width-image {
+  width: 100%;
+  height: auto; /* Maintain aspect ratio */
+  display: block; /* Removes extra whitespace below the image */
+}
+
+.videos-list {
+  display: flex;
+  flex-direction: column;
+  margin: 0px 32px 0px 32px;
+  width: 30vw;
+  div {
+    color: #ffffff;
+  }
+}
+
+.vertical {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+
+  .thumbnail-wrapper {
     position: relative;
-  
-    .content-overlay {
+    cursor: pointer;
+
+    img {
+      width: 214px;
+      height: 120px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 3px solid transparent;
+      filter: brightness(1);
+
+      &:hover {
+        transform: scale(1.05);
+        border-color: #2e3edf;
+        box-shadow: 0 0 10px rgba(46, 62, 223, 0.5);
+        filter: brightness(1.05);
+      }
+    }
+
+    .play-icon {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      text-align: center;
-      color: white; /* Ensure the text is visible over the background */
-    }
-  
-    h3, span {
-      margin: 0;
-      padding: 0;
-    }
-  
-    button {
-      margin-top: 20px;
+      font-size: 48px;
+      color: rgba(255, 255, 255, 0.8);
+      opacity: 0; /* Initially hidden */
+      transition: opacity 0.3s ease;
+
+      /* Make icon visible when hovering over the thumbnail */
+      .thumbnail-wrapper:hover & {
+        opacity: 1;
+      }
     }
   }
-
-
-.full-width-image {
-    width: 100%;
-    height: auto; /* Maintain aspect ratio */
-    display: block; /* Removes extra whitespace below the image */
-  }
-
-.videos-list{
-    display: flex;
-    flex-direction: column;
-    margin: 0px 32px 0px 32px;
-    width: 30vw;
-    div {
-        color: #FFFFFF;
-    }
 }
-
-.vertical {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-  
-    .thumbnail-wrapper {
-      position: relative;
-      cursor: pointer;
-  
-      img {
-        width: 214px;
-        height: 120px;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        border: 3px solid transparent;
-        filter: brightness(1);
-  
-        &:hover {
-          transform: scale(1.05);
-          border-color: #2e3edf;
-          box-shadow: 0 0 10px rgba(46, 62, 223, 0.5);
-          filter: brightness(1.05);
-        }
-      }
-  
-      .play-icon {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        font-size: 48px;
-        color: rgba(255, 255, 255, 0.8);
-        opacity: 0; /* Initially hidden */
-        transition: opacity 0.3s ease;
-  
-        /* Make icon visible when hovering over the thumbnail */
-        .thumbnail-wrapper:hover & {
-          opacity: 1;
-        }
-      }
-    }
-  }
