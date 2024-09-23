@@ -1,37 +1,31 @@
-<div class="videos">
-  <h3>Breakout</h3>
-  <span>
-    Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit
-    Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen.
-    Personenbezogene Daten sind alle Daten, mit denen Sie persönlich
-    identifiziert werden können. </span
-  ><br /><br />
-  <button mat-flat-button>
-    <mat-icon aria-hidden="false" fontIcon="play_arrow"></mat-icon>Play
-  </button>
+<div class="videos" [ngStyle]="{'background-image': 'url(' + currentThumbnail + ')'}">
+  <div class="content-overlay">
+    <h3>{{ title }}</h3>
+    <span>{{ description }}</span>
+    <br /><br />
+    <button mat-flat-button>
+      <mat-icon aria-hidden="false" fontIcon="play_arrow"></mat-icon>Play
+    </button>
+  </div>
 </div>
 <div class="videos-list">
   <mat-list>
-    <div mat-subheader>Folders</div>
+    @for (category of getGroupedVideoKeys(); track category) {
+    <div mat-subheader>{{ category }}</div>
     <div class="vertical">
-      @for (folder of folders; track folder) {
-      <mat-list-item>
-        <mat-icon matListItemIcon>folder</mat-icon>
-        <div matListItemTitle>{{ folder.name }}</div>
-        <div matListItemLine>{{ folder.updated | date }}</div>
-      </mat-list-item>
+      @for (video of groupedVideos[category]; track video) {
+      <div class="thumbnail-wrapper">
+        @if (video.thumbnail_file) {
+        <img
+          [src]="video.thumbnail_file"
+          alt="Video Thumbnail"
+          class="video-thumbnail"
+          (click)="showInfo(video)"
+        />
+        }
+      </div>
       }
     </div>
-    <mat-divider></mat-divider>
-    <div mat-subheader>Notes</div>
-    <div class="vertical">
-      @for (note of notes; track note) {
-      <mat-list-item>
-        <mat-icon matListItemIcon>note</mat-icon>
-        <div matListItemTitle>{{ note.name }}</div>
-        <div matListItemLine>{{ note.updated | date }}</div>
-      </mat-list-item>
-      }
-    </div>
+    }
   </mat-list>
 </div>

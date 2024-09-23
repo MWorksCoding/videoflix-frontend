@@ -10,21 +10,56 @@
     background-size: cover;
   }
 
-h3,h4{
-    color: #FFFFFF;
-}
-span {
-    color: #FFFFFF;
-}
-.videos{
-    display: flex;
-    flex-direction: column;
-    margin: 128px 32px 0px 32px;
-    width: 30vw;
-}
-button{
-    width: 120px;
-}
+// h3,h4{
+//     color: #FFFFFF;
+// }
+// span {
+//     color: #FFFFFF;
+// }
+// .videos{
+//     display: flex;
+//     flex-direction: column;
+//     margin: 128px 32px 0px 32px;
+//     width: 30vw;
+// }
+// button{
+//     width: 120px;
+// }
+
+
+.videos {
+    width: 100vw; /* Full width of the viewport */
+    height: 33vh; /* One-third of the viewport height */
+    background-size: cover; /* Ensures the image covers the entire div */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Prevent repeating the image */
+    position: relative;
+  
+    .content-overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: white; /* Ensure the text is visible over the background */
+    }
+  
+    h3, span {
+      margin: 0;
+      padding: 0;
+    }
+  
+    button {
+      margin-top: 20px;
+    }
+  }
+
+
+.full-width-image {
+    width: 100%;
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Removes extra whitespace below the image */
+  }
 
 .videos-list{
     display: flex;
@@ -36,6 +71,44 @@ button{
     }
 }
 
-.vertical{
-    display: flex !important;
-}
+.vertical {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  
+    .thumbnail-wrapper {
+      position: relative;
+      cursor: pointer;
+  
+      img {
+        width: 214px;
+        height: 120px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: 3px solid transparent;
+        filter: brightness(1);
+  
+        &:hover {
+          transform: scale(1.05);
+          border-color: #2e3edf;
+          box-shadow: 0 0 10px rgba(46, 62, 223, 0.5);
+          filter: brightness(1.05);
+        }
+      }
+  
+      .play-icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 48px;
+        color: rgba(255, 255, 255, 0.8);
+        opacity: 0; /* Initially hidden */
+        transition: opacity 0.3s ease;
+  
+        /* Make icon visible when hovering over the thumbnail */
+        .thumbnail-wrapper:hover & {
+          opacity: 1;
+        }
+      }
+    }
+  }
