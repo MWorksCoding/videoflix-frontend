@@ -1,11 +1,5 @@
 import { Component } from '@angular/core';
-import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatIconModule } from '@angular/material/icon';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatSelectModule } from '@angular/material/select';
+import { MaterialDesignModule } from '../shared/material-design.module';
 import {
   FormControl,
   FormGroupDirective,
@@ -42,13 +36,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   selector: 'app-register',
   standalone: true,
   imports: [
-    MatCardModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatInputModule,
-    MatIconModule,
-    MatCheckboxModule,
+    MaterialDesignModule,
     FormsModule,
     ReactiveFormsModule,
     CommonModule,

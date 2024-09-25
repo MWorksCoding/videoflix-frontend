@@ -10,22 +10,6 @@
   background-size: cover;
 }
 
-// h3,h4{
-//     color: #FFFFFF;
-// }
-// span {
-//     color: #FFFFFF;
-// }
-// .videos{
-//     display: flex;
-//     flex-direction: column;
-//     margin: 128px 32px 0px 32px;
-//     width: 30vw;
-// }
-// button{
-//     width: 120px;
-// }
-
 .videos {
   width: 100vw; 
   height: 50vh; 
@@ -56,8 +40,8 @@
 
 .full-width-image {
   width: 100%;
-  height: auto; /* Maintain aspect ratio */
-  display: block; /* Removes extra whitespace below the image */
+  height: auto;
+  display: block;
 }
 
 .videos-list {
