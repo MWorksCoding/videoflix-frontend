@@ -63,7 +63,6 @@ export class VideosComponent {
     try {
       const url = environment.baseUrl + '/videos/';
       const response = await lastValueFrom(this.http.get(url));
-      console.error('response:', response);
       this.videos = response as any[];
       this.groupVideosByCategory();
     } catch (error) {

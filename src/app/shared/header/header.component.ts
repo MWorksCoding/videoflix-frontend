@@ -49,7 +49,8 @@ export class HeaderComponent {
       );
       await lastValueFrom(this.http.post(url, {}, { headers }));
       localStorage.removeItem('token');
-      localStorage.removeItem('email');
+      localStorage.removeItem('user-Email');
+      localStorage.removeItem('user-Id');
       this.common.openSnackBar('Now your are logged out', 'OK');
       this.router.navigateByUrl('/login');
     } catch (e) {

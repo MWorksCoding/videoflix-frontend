@@ -22,7 +22,6 @@ export class VideoDialogComponent {
     @Inject(MAT_DIALOG_DATA) public data: { videodata: any },
     private http: HttpClient
   ) {
-    console.log('videodata', this.data);
   }
 
   ngOnInit(): void {

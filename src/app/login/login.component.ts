@@ -93,10 +93,10 @@ export class LoginComponent {
         this.password
       );
       localStorage.setItem('token', resp.token);
-      localStorage.setItem('username', resp.username);
+      localStorage.setItem('user-Email', resp.email);
+      localStorage.setItem('user-Id', resp.user_id);
       this.router.navigateByUrl('/videos');
     } catch (e) {
-      // add a snackbar and makt the error visible!
       console.error(e);
       this.common.openSnackBar("Wrong Login data, please try again", 'OK');
     }
