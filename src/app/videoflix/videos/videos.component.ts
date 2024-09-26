@@ -7,6 +7,13 @@ import { DatePipe } from '@angular/common';
 import { MaterialDesignModule } from '../../shared/material-design.module';
 import { VideoDialogComponent } from '../video-dialog/video-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
 
 @Component({
   selector: 'app-videos',
@@ -14,15 +21,32 @@ import { MatDialog } from '@angular/material/dialog';
   imports: [MaterialDesignModule, DatePipe],
   templateUrl: './videos.component.html',
   styleUrl: './videos.component.scss',
+  animations: [
+    trigger('fadeInOut', [
+      state(
+        'void',
+        style({
+          opacity: 0, // The initial opacity when the element is not visible
+        })
+      ),
+      state(
+        'visible',
+        style({
+          opacity: 1, // The final opacity when the element is fully visible
+        })
+      ),
+      transition('void => visible', animate('0.25s ease-in-out')), // 500ms fade-in
+    ]),
+  ],
 })
 export class VideosComponent {
   videos: any[] = [];
   groupedVideos: { [key: string]: any[] } = {};
   title: string = 'Breakout';
   videoUrl: string = '';
-  description: string =
-    'Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen. Personenbezogene Daten sind alle Daten, mit denen Sie persönlich identifiziert werden können';
-  currentThumbnail: string = '/assets/img/bg-login.jpeg';
+  description: string = '';
+  currentThumbnail: string = '';
+  animationState: string = 'visible';
 
   constructor(
     public common: CommonService,
@@ -47,7 +71,7 @@ export class VideosComponent {
     }
   }
 
-  groupVideosByCategory(): void {
+  groupVideosByCategory() {
     this.groupedVideos = this.videos.reduce((acc, video) => {
       const genre = video.genre || 'Uncategorized';
       if (!acc[genre]) {
@@ -56,6 +80,17 @@ export class VideosComponent {
       acc[genre].push(video);
       return acc;
     }, {});
+    this.selectFirstVideo();
+  }
+
+  selectFirstVideo() {
+    const allVideos = Object.values(this.groupedVideos).flat();
+    if (allVideos.length > 0) {
+      const videoWithLowestId = allVideos.reduce((min, video) => {
+        return video.id < min.id ? video : min;
+      });
+      this.showInfo(videoWithLowestId);
+    }
   }
 
   getGroupedVideoKeys(): string[] {
@@ -63,17 +98,24 @@ export class VideosComponent {
   }
 
   showInfo(video: {
-    
     thumbnail_file: string;
     title: string;
     description: string;
     video_file: string;
   }) {
-    console.log(video)
+    console.log(video);
     this.title = video.title;
     this.description = video.description;
     this.currentThumbnail = video.thumbnail_file;
-    this.videoUrl = video.video_file
+    this.videoUrl = video.video_file;
+    this.triggerAnimation();
+  }
+
+  triggerAnimation() {
+    this.animationState = 'void';
+    setTimeout(() => {
+      this.animationState = 'visible';
+    }, 250);
   }
 
   getBackgroundStyle() {
