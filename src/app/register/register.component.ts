@@ -23,12 +23,21 @@ import { HttpClient } from '@angular/common/http';
 import { CommonService } from '../services/common.service';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+import { environment } from '../../environments/environments';
+import { lastValueFrom } from 'rxjs';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+  isErrorState(
+    control: FormControl | null,
+    form: FormGroupDirective | NgForm | null
+  ): boolean {
     const isSubmitted = form && form.submitted;
-    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+    return !!(
+      control &&
+      control.invalid &&
+      (control.dirty || control.touched || isSubmitted)
+    );
   }
 }
 
@@ -40,9 +49,9 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
-    RouterOutlet, 
-    RouterLink, 
-    RouterLinkActive
+    RouterOutlet,
+    RouterLink,
+    RouterLinkActive,
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
@@ -59,8 +68,10 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   ],
 })
 export class RegisterComponent {
-
-  emailFormControl = new FormControl('', [Validators.required, Validators.email]);
+  emailFormControl = new FormControl('', [
+    Validators.required,
+    Validators.email,
+  ]);
   passwordFormControl = new FormControl('', [Validators.required]);
   confirmPasswordFormControl = new FormControl('', [Validators.required]);
   matcher = new MyErrorStateMatcher();
@@ -68,7 +79,6 @@ export class RegisterComponent {
   email: string = '';
   password: string = '';
   form: FormGroup | undefined;
-
 
   constructor(
     private router: Router,
@@ -78,16 +88,55 @@ export class RegisterComponent {
   ) {}
 
   passwordsMatch(): boolean {
-    return this.passwordFormControl.value === this.confirmPasswordFormControl.value;
+    return (
+      this.passwordFormControl.value === this.confirmPasswordFormControl.value
+    );
   }
 
-  // Check if the form is valid for enabling the submit button
   isFormValid(): boolean {
-    return this.emailFormControl.valid && this.passwordFormControl.valid && this.confirmPasswordFormControl.valid && this.passwordsMatch();
+    return (
+      this.emailFormControl.valid &&
+      this.passwordFormControl.valid &&
+      this.confirmPasswordFormControl.valid &&
+      this.passwordsMatch()
+    );
   }
 
   ngOnInit(): void {
-    this.common.component = "home";
+    this.common.component = 'home';
   }
 
+  async registerUser() {
+    try {
+      let url = environment.baseUrl + '/api/accounts/signup/';
+      let body = {
+        email: this.emailFormControl.value,
+        password: this.passwordFormControl.value,
+      };
+      const response = await lastValueFrom(this.http.post(url, body));
+      this.emailFormControl = new FormControl('', [
+        Validators.required,
+        Validators.email,
+      ]);
+      this.passwordFormControl = new FormControl('', [Validators.required]);
+      this.confirmPasswordFormControl = new FormControl('', [
+        Validators.required,
+      ]);
+      this.common.openSnackBar(
+        'Please confirm your registration using the link in the email we just sent you.',
+        ''
+      );
+      setTimeout(() => {
+        this.router.navigateByUrl('/login');
+      }, 7500);
+    } catch (error) {
+      console.error('Error at registration. Please try again later.', error);
+      setTimeout(() => {
+        this.common.openSnackBar(
+          'Error at registration. Please try again later.',
+          'OK'
+        );
+      }, 5000);
+    }
+  }
 }

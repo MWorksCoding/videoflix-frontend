@@ -98,11 +98,8 @@ export class LoginComponent {
       this.router.navigateByUrl('/videos');
     } catch (e) {
       console.error(e);
-      this.common.openSnackBar("Wrong Login data, please try again", 'OK');
+      this.common.openSnackBar('Wrong Login data, please try again', 'OK');
     }
     this.common.loading = false;
   }
-
-
-
 }
