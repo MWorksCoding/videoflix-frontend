@@ -6,7 +6,7 @@
     <div class="login-input-fields">
       <mat-form-field>
         <mat-label>Email Address</mat-label>
-        <input type="email" matInput [(ngModel)]="email" [formControl]="emailFormControl" [errorStateMatcher]="matcher"
+        <input type="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
                placeholder="">
         @if (emailFormControl.hasError('email') && !emailFormControl.hasError('required')) {
           <mat-error>Please enter a valid email address</mat-error>
@@ -19,15 +19,10 @@
     <div class="login-input-fields">
       <mat-form-field>
         <mat-label>Password</mat-label>
-        <input
-          matInput
-          type="password"
-          name="password"
-          [(ngModel)]="password"
-          required
-          placeholder="Please enter your password"
-          title="Please enter your password"
-        />
+        <input matInput type="password" [formControl]="passwordFormControl" placeholder="Please enter your password" required>
+          @if (passwordFormControl.hasError('required')) {
+            <mat-error>A valid Password is <strong>required</strong></mat-error>
+          }
       </mat-form-field>
     </div>
     <mat-checkbox class="remember-me" [checked]="rememberMe"
@@ -35,7 +30,7 @@
     >
     <div class="button-links">
       <mat-card-actions>
-        <button mat-raised-button type="submit" class="submit-button" (click)="login()">
+        <button mat-raised-button type="submit" class="submit-button" [ngClass]="{'invalid-button': !isFormValid()}" [disabled]="!isFormValid()" (click)="login()">
           Login
         </button>
       </mat-card-actions>

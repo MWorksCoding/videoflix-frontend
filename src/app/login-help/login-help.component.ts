@@ -21,6 +21,8 @@ import { HttpClient } from '@angular/common/http';
 import { CommonService } from '../services/common.service';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+import { environment } from '../../environments/environments';
+import { lastValueFrom } from 'rxjs';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -72,5 +74,34 @@ export class LoginHelpComponent {
 
   ngOnInit(): void {
     this.common.component = "home";
+  }
+
+  async resetPassword() {
+    try {
+      let url = environment.baseUrl + '/api/accounts/password/reset/';
+      let body = {
+        email: this.emailFormControl.value,
+      };
+      const response = await lastValueFrom(this.http.post(url, body));
+      this.emailFormControl = new FormControl('', [
+        Validators.required,
+        Validators.email,
+      ]);
+      this.common.openSnackBar(
+        'To reset your password use the link in the email we just sent you.',
+        ''
+      );
+      setTimeout(() => {
+        this.router.navigateByUrl('/login');
+      }, 5000);
+    } catch (error) {
+      console.error('Error at password reset. Please try again later.', error);
+      setTimeout(() => {
+        this.common.openSnackBar(
+          'Error at password reset. Please try again later.',
+          'OK'
+        );
+      }, 5000);
+    }
   }
 }

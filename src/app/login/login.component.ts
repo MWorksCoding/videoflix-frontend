@@ -69,9 +69,9 @@ export class LoginComponent {
     Validators.required,
     Validators.email,
   ]);
+  passwordFormControl = new FormControl('', [Validators.required]);
   matcher = new MyErrorStateMatcher();
   rememberMe: boolean = false;
-  email: string = '';
   password: string = '';
 
   constructor(
@@ -88,9 +88,11 @@ export class LoginComponent {
   async login() {
     this.common.loading = true;
     try {
+      const email = this.emailFormControl.value ?? '';
+      const password = this.passwordFormControl.value ?? '';
       let resp: any = await this.auth.loginWithEmailAndPassword(
-        this.email,
-        this.password
+        email,
+        password
       );
       localStorage.setItem('token', resp.token);
       localStorage.setItem('user-Email', resp.email);
@@ -101,5 +103,9 @@ export class LoginComponent {
       this.common.openSnackBar('Wrong Login data, please try again', 'OK');
     }
     this.common.loading = false;
+  }
+
+  isFormValid(): boolean {
+    return this.emailFormControl.valid && this.passwordFormControl.valid;
   }
 }

@@ -10,7 +10,7 @@ import {
   FormGroup,
   FormBuilder,
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import {
   animate,
@@ -42,7 +42,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 }
 
 @Component({
-  selector: 'app-register',
+  selector: 'app-password-reset',
   standalone: true,
   imports: [
     MaterialDesignModule,
@@ -53,8 +53,8 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
     RouterLink,
     RouterLinkActive,
   ],
-  templateUrl: './register.component.html',
-  styleUrl: './register.component.scss',
+  templateUrl: './password-reset.component.html',
+  styleUrl: './password-reset.component.scss',
   animations: [
     trigger('fadeInOut', [
       state(
@@ -67,11 +67,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
     ]),
   ],
 })
-export class RegisterComponent {
-  emailFormControl = new FormControl('', [
-    Validators.required,
-    Validators.email,
-  ]);
+export class PasswordResetComponent {
   passwordFormControl = new FormControl('', [Validators.required]);
   confirmPasswordFormControl = new FormControl('', [Validators.required]);
   matcher = new MyErrorStateMatcher();
@@ -79,13 +75,22 @@ export class RegisterComponent {
   email: string = '';
   password: string = '';
   form: FormGroup | undefined;
+  resetForm: FormGroup;
+  code: string | null = null;
 
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private fb: FormBuilder,
     private http: HttpClient,
     public common: CommonService
-  ) {}
+  ) {
+    this.resetForm = new FormGroup({
+      password: new FormControl('', [Validators.required]),
+      confirmPassword: new FormControl('', [Validators.required])
+    });
+
+  }
 
   passwordsMatch(): boolean {
     return (
@@ -95,7 +100,6 @@ export class RegisterComponent {
 
   isFormValid(): boolean {
     return (
-      this.emailFormControl.valid &&
       this.passwordFormControl.valid &&
       this.confirmPasswordFormControl.valid &&
       this.passwordsMatch()
@@ -104,36 +108,35 @@ export class RegisterComponent {
 
   ngOnInit(): void {
     this.common.component = 'home';
+    this.route.queryParamMap.subscribe((params) => {
+      this.code = params.get('code');
+    });
   }
 
-  async registerUser() {
+  async resetPassword() {
     try {
-      let url = environment.baseUrl + '/api/accounts/signup/';
+      let url = environment.baseUrl + '/api/accounts/password/reset/verified/';
       let body = {
-        email: this.emailFormControl.value,
+        code:this.code,
         password: this.passwordFormControl.value,
       };
       const response = await lastValueFrom(this.http.post(url, body));
-      this.emailFormControl = new FormControl('', [
-        Validators.required,
-        Validators.email,
-      ]);
       this.passwordFormControl = new FormControl('', [Validators.required]);
       this.confirmPasswordFormControl = new FormControl('', [
         Validators.required,
       ]);
       this.common.openSnackBar(
-        'Please confirm your registration using the link in the email we just sent you.',
+        'Password reset was successfull. Now we redirect you to the login',
         ''
       );
       setTimeout(() => {
         this.router.navigateByUrl('/login');
       }, 5000);
     } catch (error) {
-      console.error('Error at registration. Please try again later.', error);
+      console.error('Error resetting your password. Please try again later.', error);
       setTimeout(() => {
         this.common.openSnackBar(
-          'Error at registration. Please try again later.',
+          'Error resetting your password. Please try again later.',
           'OK'
         );
       }, 5000);
