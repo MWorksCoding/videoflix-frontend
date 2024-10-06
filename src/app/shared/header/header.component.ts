@@ -6,39 +6,55 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
-import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
 import { CommonService } from '../../services/common.service';
-import { MatIconModule } from '@angular/material/icon';
+import { MaterialDesignModule } from '../material-design.module';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';
 import { environment } from '../../../environments/environments';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [MatButtonModule, MatIconModule],
+  imports: [MaterialDesignModule],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.scss',
-  animations: [
-    trigger('fadeInOut', [
-      state(
-        'void',
-        style({
-          opacity: 0,
-        })
-      ),
-      transition('void <=> *', animate('0.5s ease-in-out')),
-    ]),
-  ],
+  styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
-  constructor(private router: Router, public common: CommonService, private http: HttpClient) {}
+  constructor(
+    private router: Router,
+    public common: CommonService,
+    private http: HttpClient,
+    private location: Location
+  ) {}
   error: string = '';
-  redirectToLogin() {
+
+  /**
+   * Navigates the user to the login page.
+   * This method uses the Angular `Router` to navigate the application to the `/login` route.
+   *
+   * @returns {void}
+   */
+  redirectToLogin(): void {
     this.router.navigateByUrl('/login');
   }
 
+  /**
+   * Asynchronously logs out the user by sending a logout request to the server.
+   *
+   * This method performs the following steps:
+   * 1. Constructs the URL for the logout API endpoint.
+   * 2. Creates an `HttpHeaders` object and sets the `Authorization` header using the token stored in `localStorage`.
+   * 3. Sends a POST request to the logout URL to log the user out.
+   * 4. Removes the token and user information from `localStorage` upon successful logout.
+   * 5. Displays a snackbar notification to inform the user they have logged out.
+   * 6. Redirects the user to the login page after a successful logout.
+   * 7. If an error occurs during the logout process, it sets an error message.
+   *
+   * @async
+   * @returns {Promise<void>} A promise that resolves when the logout process is complete.
+   */
   async logout() {
     try {
       const url = environment.baseUrl + '/logout/';
@@ -56,5 +72,14 @@ export class HeaderComponent {
     } catch (e) {
       this.error = 'Error while logging out';
     }
+  }
+
+  /**
+   * Navigates the user back to the previous page in the browser's history.
+   * This method uses the Angular `Location` service to navigate back to the previous page.
+   * @returns {void}
+   */
+  goBack(): void {
+    this.location.back();
   }
 }

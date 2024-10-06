@@ -18,7 +18,6 @@ export class AuthService {
    * @returns HTTP response after logging in.
    */
   public loginWithEmailAndPassword(email: string, password: string) {
-
     const url = environment.baseUrl + '/login/';
     const body = {
       username: email,

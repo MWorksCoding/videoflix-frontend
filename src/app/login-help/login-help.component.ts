@@ -26,9 +26,16 @@ import { lastValueFrom } from 'rxjs';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+  isErrorState(
+    control: FormControl | null,
+    form: FormGroupDirective | NgForm | null
+  ): boolean {
     const isSubmitted = form && form.submitted;
-    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+    return !!(
+      control &&
+      control.invalid &&
+      (control.dirty || control.touched || isSubmitted)
+    );
   }
 }
 
@@ -40,9 +47,9 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
-    RouterOutlet, 
-    RouterLink, 
-    RouterLinkActive
+    RouterOutlet,
+    RouterLink,
+    RouterLinkActive,
   ],
   templateUrl: './login-help.component.html',
   styleUrl: './login-help.component.scss',
@@ -59,12 +66,13 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   ],
 })
 export class LoginHelpComponent {
-
-  emailFormControl = new FormControl('', [Validators.required, Validators.email]);
+  emailFormControl = new FormControl('', [
+    Validators.required,
+    Validators.email,
+  ]);
   matcher = new MyErrorStateMatcher();
   email: string = '';
   password: string = '';
-
 
   constructor(
     private router: Router,
@@ -72,10 +80,27 @@ export class LoginHelpComponent {
     public common: CommonService
   ) {}
 
+  /**
+   * Initializes the component.
+   */
   ngOnInit(): void {
-    this.common.component = "home";
+    this.common.component = 'home';
   }
 
+  /**
+   * Asynchronously resets the user's password by sending a password reset request to the server.
+   *
+   * This method performs the following steps:
+   * 1. Constructs the URL for the password reset API endpoint.
+   * 2. Sends a POST request to the server with the user's email to initiate the password reset process.
+   * 3. Upon successful request, resets the `emailFormControl` to an empty state and displays a snackbar message
+   *    informing the user to check their email for the password reset link.
+   * 4. After a 5-second delay, navigates the user to the login page.
+   * 5. If an error occurs during the process, logs the error to the console and displays an error message in a snackbar.
+   *
+   * @async
+   * @returns {Promise<void>} A promise that resolves when the password reset process is complete.
+   */
   async resetPassword() {
     try {
       let url = environment.baseUrl + '/api/accounts/password/reset/';

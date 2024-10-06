@@ -26,7 +26,6 @@ import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { environment } from '../../environments/environments';
 import { lastValueFrom } from 'rxjs';
 
-
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(
     control: FormControl | null,
@@ -87,25 +86,13 @@ export class PasswordResetComponent {
   ) {
     this.resetForm = new FormGroup({
       password: new FormControl('', [Validators.required]),
-      confirmPassword: new FormControl('', [Validators.required])
+      confirmPassword: new FormControl('', [Validators.required]),
     });
-
   }
 
-  passwordsMatch(): boolean {
-    return (
-      this.passwordFormControl.value === this.confirmPasswordFormControl.value
-    );
-  }
-
-  isFormValid(): boolean {
-    return (
-      this.passwordFormControl.valid &&
-      this.confirmPasswordFormControl.valid &&
-      this.passwordsMatch()
-    );
-  }
-
+  /**
+   * Initializes the component.
+   */
   ngOnInit(): void {
     this.common.component = 'home';
     this.route.queryParamMap.subscribe((params) => {
@@ -113,11 +100,24 @@ export class PasswordResetComponent {
     });
   }
 
+  /**
+   * Asynchronously resets the user's password using a verification code.
+   *
+   * This method performs the following steps:
+   * 1. Constructs the URL for the verified password reset API endpoint.
+   * 2. Sends a POST request with the reset `code` and new password.
+   * 3. Resets the `passwordFormControl` and `confirmPasswordFormControl` after a successful password reset.
+   * 4. Displays a success message in a snackbar and redirects the user to the login page after a 5-second delay.
+   * 5. If an error occurs, logs the error and shows an error message in a snackbar.
+   *
+   * @async
+   * @returns {Promise<void>} A promise that resolves when the password reset process is complete.
+   */
   async resetPassword() {
     try {
       let url = environment.baseUrl + '/api/accounts/password/reset/verified/';
       let body = {
-        code:this.code,
+        code: this.code,
         password: this.passwordFormControl.value,
       };
       const response = await lastValueFrom(this.http.post(url, body));
@@ -133,7 +133,10 @@ export class PasswordResetComponent {
         this.router.navigateByUrl('/login');
       }, 5000);
     } catch (error) {
-      console.error('Error resetting your password. Please try again later.', error);
+      console.error(
+        'Error resetting your password. Please try again later.',
+        error
+      );
       setTimeout(() => {
         this.common.openSnackBar(
           'Error resetting your password. Please try again later.',
@@ -141,5 +144,41 @@ export class PasswordResetComponent {
         );
       }, 5000);
     }
+  }
+
+  /**
+   * Checks if the password and confirm password fields match.
+   *
+   * This method compares the values of `passwordFormControl` and `confirmPasswordFormControl`
+   * to ensure that they are identical. It can be used to display validation errors or
+   * prevent form submissions when the passwords do not match.
+   *
+   * @returns {boolean} `true` if both password fields match, otherwise `false`.
+   */
+  passwordsMatch(): boolean {
+    return (
+      this.passwordFormControl.value === this.confirmPasswordFormControl.value
+    );
+  }
+
+  /**
+   * Checks if the form is valid.
+   *
+   * This method ensures that:
+   * 1. The `passwordFormControl` is valid.
+   * 2. The `confirmPasswordFormControl` is valid.
+   * 3. Both passwords match (as validated by `passwordsMatch()`).
+   *
+   * It is typically used to enable or disable the submit button and prevent form submission
+   * if any of these conditions are not met.
+   *
+   * @returns {boolean} `true` if the form is valid and the passwords match, otherwise `false`.
+   */
+  isFormValid(): boolean {
+    return (
+      this.passwordFormControl.valid &&
+      this.confirmPasswordFormControl.valid &&
+      this.passwordsMatch()
+    );
   }
 }

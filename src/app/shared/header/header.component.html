@@ -8,22 +8,18 @@
       <img alt="Logo" src="../../../assets/img/Symbol.svg" />
     </div>
   } @if (common.component == "home") {
-  <div class="text-signup" [@fadeInOut]>
+  <div class="text-signup">
     <button mat-flat-button (click)="redirectToLogin()">Log In</button>
   </div>
   } @if (common.component == "videos") {
-  <div class="text-signup" [@fadeInOut]>
+  <div class="text-signup">
     <button mat-flat-button (click)="logout()">
-      <mat-icon aria-hidden="false" fontIcon="logout"></mat-icon>Log Out
+      <mat-icon class="material-symbols-outlined">logout</mat-icon> Log Out
     </button>
   </div>
   } @if (common.component == "imprint-privacy") {
-  <div class="text-signup" [@fadeInOut]>
-    <mat-icon
-      (click)="redirectToLogin()"
-      aria-hidden="false"
-      fontIcon="arrow_back"
-    ></mat-icon>
+  <div class="text-signup">
+    <mat-icon (click)="goBack()" class="material-symbols-outlined">arrow_back</mat-icon>
   </div>
   }
 </div>

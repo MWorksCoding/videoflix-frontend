@@ -40,10 +40,11 @@ import { AuthService } from '../services/auth.service';
   ],
 })
 export class RegisterVerifiedComponent {
-  constructor(
-    public common: CommonService
-  ) {}
+  constructor(public common: CommonService) {}
 
+  /**
+   * Initializes the component.
+   */
   ngOnInit(): void {
     this.common.component = 'login';
   }

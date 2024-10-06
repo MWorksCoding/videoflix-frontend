@@ -6,14 +6,15 @@ import { CommonService } from '../../services/common.service';
   standalone: true,
   imports: [],
   templateUrl: './privacy.component.html',
-  styleUrl: './privacy.component.scss'
+  styleUrl: './privacy.component.scss',
 })
 export class PrivacyComponent {
-  constructor(
-    public common: CommonService
-  ) {}
+  constructor(public common: CommonService) {}
 
+  /**
+   * Initializes the component.
+   */
   ngOnInit(): void {
-    this.common.component = "imprint-privacy";
+    this.common.component = 'imprint-privacy';
   }
 }

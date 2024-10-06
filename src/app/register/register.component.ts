@@ -26,7 +26,7 @@ import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { environment } from '../../environments/environments';
 import { lastValueFrom } from 'rxjs';
 
-
+/** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(
     control: FormControl | null,
@@ -87,25 +87,32 @@ export class RegisterComponent {
     public common: CommonService
   ) {}
 
-  passwordsMatch(): boolean {
-    return (
-      this.passwordFormControl.value === this.confirmPasswordFormControl.value
-    );
-  }
-
-  isFormValid(): boolean {
-    return (
-      this.emailFormControl.valid &&
-      this.passwordFormControl.valid &&
-      this.confirmPasswordFormControl.valid &&
-      this.passwordsMatch()
-    );
-  }
-
+  /**
+   * Initializes the component.
+   * If there is an existing email stored in
+   * `common.existingEmail`, it populates the `emailFormControl` with that value, allowing the email field to be pre-filled.
+   */
   ngOnInit(): void {
     this.common.component = 'home';
+    if (this.common.existingEmail) {
+      this.emailFormControl.setValue(this.common.existingEmail);
+    }
   }
 
+  /**
+   * Asynchronously registers a new user by sending a signup request to the server.
+   *
+   * This method performs the following steps:
+   * 1. Constructs the URL for the signup API endpoint.
+   * 2. Sends a POST request with the user's email and password to register a new account.
+   * 3. Upon successful registration, resets the `emailFormControl`, `passwordFormControl`, and `confirmPasswordFormControl`.
+   * 4. Displays a success message in a snackbar, informing the user to confirm their registration via email.
+   * 5. After a 5-second delay, navigates the user to the login page.
+   * 6. If an error occurs, logs the error and displays an error message in a snackbar.
+   *
+   * @async
+   * @returns {Promise<void>} A promise that resolves when the registration process is complete.
+   */
   async registerUser() {
     try {
       let url = environment.baseUrl + '/api/accounts/signup/';
@@ -138,5 +145,43 @@ export class RegisterComponent {
         );
       }, 5000);
     }
+  }
+
+  /**
+   * Checks if the password and confirm password fields match.
+   *
+   * This method compares the values of `passwordFormControl` and `confirmPasswordFormControl`
+   * to ensure that they are identical. It can be used to display validation errors or
+   * prevent form submissions when the passwords do not match.
+   *
+   * @returns {boolean} `true` if both password fields match, otherwise `false`.
+   */
+  passwordsMatch(): boolean {
+    return (
+      this.passwordFormControl.value === this.confirmPasswordFormControl.value
+    );
+  }
+
+  /**
+   * Checks if the registration form is valid.
+   *
+   * This method ensures that:
+   * 1. The `emailFormControl` is valid.
+   * 2. The `passwordFormControl` is valid.
+   * 3. The `confirmPasswordFormControl` is valid.
+   * 4. Both passwords match (as validated by `passwordsMatch()`).
+   *
+   * It is typically used to enable or disable the registration button and prevent form submission
+   * if any of these conditions are not met.
+   *
+   * @returns {boolean} `true` if the form is valid and the passwords match, otherwise `false`.
+   */
+  isFormValid(): boolean {
+    return (
+      this.emailFormControl.valid &&
+      this.passwordFormControl.valid &&
+      this.confirmPasswordFormControl.valid &&
+      this.passwordsMatch()
+    );
   }
 }

@@ -36,10 +36,11 @@ import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
   ],
 })
 export class NotFoundComponent {
-  constructor(
-    public common: CommonService
-  ) {}
+  constructor(public common: CommonService) {}
 
+  /**
+   * Initializes the component.
+   */
   ngOnInit(): void {
     this.common.component = 'login';
   }

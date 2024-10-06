@@ -39,7 +39,7 @@
   font-size: 48px;
   font-weight: 700;
   line-height: 62.5px;
-  text-align: left;
+  text-align: center;
   color: #ffffff;
 }
 
@@ -48,7 +48,6 @@
   font-weight: 500;
   line-height: 31.25px;
   text-align: center;
-  text-align: left;
   color: #ffffff;
 }
 
@@ -57,13 +56,13 @@
   font-weight: 400;
   line-height: 23.44px;
   text-align: center;
-  text-align: left;
   color: #ffffff;
 }
 
 .inputfield-button {
   display: flex;
   align-items: center;
+  flex-direction: column;
   justify-content: center;
   width: Hug (518px) px;
   height: Hug (48px) px;
@@ -74,4 +73,27 @@
   border: 1px white solid !important;
     border-radius: 32px !important;
     height: 48px !important;
+}
+
+.submit-button {
+  color: #ffffff !important;
+}
+
+.invalid-button {
+  background-color: #9ba1f0 !important;
+}
+
+
+@media(max-width: 650px) {
+  .header-1 {
+    font-size: 32px;
+  }
+  
+  .header-2 {
+    font-size: 18px;
+  }
+  
+  .header-3 {
+    font-size: 16px;
+  }
 }
