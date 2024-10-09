@@ -77,6 +77,10 @@
     background-color: #9BA1F0 !important
 }
 
+.mat-mdc-form-field{
+  width: 100%;
+}
+
 @media(max-width: 650px) {
   ::ng-deep .mat-mdc-form-field-infix {
     width: 278px !important

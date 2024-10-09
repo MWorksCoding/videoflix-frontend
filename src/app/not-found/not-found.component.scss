@@ -1,14 +1,14 @@
 @import '../login/login.component.scss';
 
-@media(max-width: 650px) {
-    .login-headline[_ngcontent-ng-c258564552] {
-        height: 64px;
-        line-height: 64px;
-        margin-bottom: 86px;
-        text-align: center;
-    }
+.mat-mdc-card-header {
+    padding: unset;
+}
 
-    .login-card-div[_ngcontent-ng-c258564552] {
-        margin: 24px;
-    }
-  }
+.error-headline {
+    color: #2e3edf;
+    font-size: 48px;
+    height: 64px;
+    line-height: 64px;
+    margin-bottom: 86px;
+    text-align: center;
+}

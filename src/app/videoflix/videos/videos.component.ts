@@ -201,18 +201,13 @@ export class VideosComponent {
    * @returns {void}
    */
   openVideoDialog(): void {
-    const dialogRef = this.dialog.open(VideoDialogComponent, {
+    let dialogRef = this.dialog.open(VideoDialogComponent, {
       width: 'fit-content',
       height: 'fit-content',
       autoFocus: true,
       data: {
         videodata: this.videoUrl,
       },
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result == 'video-closed') {
-      }
     });
   }
 }
