@@ -211,7 +211,6 @@ export class VideosComponent {
    * @returns {void}
    */
   openVideoDialog(): void {
-    console.log('this.videoUrl in the VideoDialog', this.videoUrl);
     let dialogRef = this.dialog.open(VideoDialogComponent, {
       width: '80vw',
       height: 'fit-content',
@@ -239,7 +238,6 @@ export class VideosComponent {
         this.currentResolution
       }.${extension}`;
     }
-    console.log(this.qualityInfoFlag)
     if (this.qualityInfoFlag) {
       this.common.openSnackBar(`Video quality set to ${quality}`, 'OK');
     }
