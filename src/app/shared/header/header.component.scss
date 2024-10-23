@@ -32,3 +32,9 @@ mat-icon {
     color: #2E3EDF;
   }
 }
+
+@media (max-width: 550px) {
+  .header {
+    padding: 0 16px;
+  }
+}

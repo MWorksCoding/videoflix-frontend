@@ -1,12 +1,33 @@
-<div class="videos" [ngStyle]="getBackgroundStyle()" [@fadeInOut]="animationState">
+<div
+  class="videos"
+  [ngStyle]="getBackgroundStyle()"
+  [@fadeInOut]="animationState"
+>
   <div class="content-overlay">
     <h3>{{ title }}</h3>
-    <br />
     <span>{{ description }}</span>
-    <br /><br />
-    <button mat-flat-button (click)="openVideoDialog()">
-      <mat-icon class="material-symbols-outlined">play_arrow</mat-icon> Play
-    </button>
+    <div class="buttons">
+      <button mat-flat-button (click)="openVideoDialog()">
+        <mat-icon class="material-symbols-outlined">play_arrow</mat-icon> Play
+      </button>
+      <button mat-flat-button [matMenuTriggerFor]="menu">
+        <mat-icon class="material-symbols-outlined">settings</mat-icon> Quality
+      </button>
+      <mat-menu #menu="matMenu">
+        @for (quality of qualities; track quality) {
+        <button
+          mat-menu-item
+          (click)="qualityInfoFlag = true; setQuality(quality.value)"
+          class="quality-selection"
+        >
+          <span>{{ quality.value }}</span>
+          @if(quality.value === currentResolution) {
+          <mat-icon class="material-symbols-outlined">check</mat-icon>
+          }
+        </button>
+        }
+      </mat-menu>
+    </div>
   </div>
 </div>
 <div class="videos-list">

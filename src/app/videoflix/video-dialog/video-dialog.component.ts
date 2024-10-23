@@ -21,7 +21,8 @@ export class VideoDialogComponent {
     public dialogRef: MatDialogRef<VideoDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { videodata: any },
     private http: HttpClient
-  ) {}
+  ) {
+  }
 
   /**
    * Lifecycle hook that is called after the component has been initialized.

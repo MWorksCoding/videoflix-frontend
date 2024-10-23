@@ -46,7 +46,16 @@ export class VideosComponent {
   videoUrl: string = '';
   description: string = '';
   currentThumbnail: string = '';
+  currentResolution: string = '720p';
   animationState: string = 'visible';
+  qualityInfoFlag: boolean = false;
+
+  qualities: any[] = [
+    { value: '120p' },
+    { value: '360p' },
+    { value: '720p' },
+    { value: '1080p' },
+  ];
 
   constructor(
     public common: CommonService,
@@ -159,11 +168,12 @@ export class VideosComponent {
     description: string;
     video_file: string;
   }) {
-    console.log(video);
     this.title = video.title;
     this.description = video.description;
     this.currentThumbnail = video.thumbnail_file;
     this.videoUrl = video.video_file;
+    this.qualityInfoFlag = false;
+    this.setQuality(this.currentResolution);
     this.triggerAnimation();
   }
 
@@ -201,13 +211,37 @@ export class VideosComponent {
    * @returns {void}
    */
   openVideoDialog(): void {
+    console.log('this.videoUrl in the VideoDialog', this.videoUrl);
     let dialogRef = this.dialog.open(VideoDialogComponent, {
-      width: 'fit-content',
+      width: '80vw',
       height: 'fit-content',
       autoFocus: true,
       data: {
         videodata: this.videoUrl,
       },
     });
+  }
+
+  /**
+   * Method to set the selected quality and update the video URL.
+   * It replaces any existing resolution in the URL with the new one.
+   *
+   * @param quality - The selected quality value (e.g., '120p', '360p', etc.)
+   */
+  setQuality(quality: string): void {
+    this.currentResolution = quality;
+    let fileName: string | undefined = this.videoUrl.split('/').pop();
+    let extension: string | undefined = fileName?.split('.').pop();
+    let baseUrl: string = this.videoUrl;
+    if (extension) {
+      baseUrl = this.videoUrl.replace(/_\d{3,4}p(?=\.\w+$)/, '');
+      this.videoUrl = `${baseUrl.slice(0, -extension.length - 1)}_${
+        this.currentResolution
+      }.${extension}`;
+    }
+    console.log(this.qualityInfoFlag)
+    if (this.qualityInfoFlag) {
+      this.common.openSnackBar(`Video quality set to ${quality}`, 'OK');
+    }
   }
 }
