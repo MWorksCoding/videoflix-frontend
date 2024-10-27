@@ -1,4 +1,4 @@
 export const environment = {
     production: false,
-    baseUrl: 'http://videoflix.marius-katzer.com'
+    baseUrl: 'http://127.0.0.1:8000'
   };  
