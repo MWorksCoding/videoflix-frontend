@@ -45,6 +45,9 @@
             Get Started
           </button>
         </mat-card-actions>
+        @if (common.loading) {
+        <mat-spinner></mat-spinner>
+      }
       </div>
     </mat-card>
   </div>

@@ -59,8 +59,14 @@
 .button-links {
   display: flex;
   flex-direction: column;
-  gap: 16px;
   align-items: center;
+
+  mat-card-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+  }
 }
 
 .submit-button {

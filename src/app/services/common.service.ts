@@ -6,9 +6,9 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 })
 export class CommonService {
   component: string = 'home';
-  loading: boolean = false;
   existingEmail!: string | null;
   public _snackBar = inject(MatSnackBar);
+  loading: boolean = false
 
   constructor() {}
 

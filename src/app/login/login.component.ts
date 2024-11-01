@@ -92,19 +92,16 @@ export class LoginComponent {
    * Asynchronously logs the user in using their email and password.
    *
    * This method performs the following steps:
-   * 1. Sets `common.loading` to `true` to indicate that the login process is in progress.
    * 2. Retrieves the values from the email and password form controls.
    * 3. Attempts to log in using the `auth.loginWithEmailAndPassword()` method.
    * 4. If the login is successful, it stores the authentication token, user email, and user ID in `localStorage`.
    * 5. Navigates the user to the `/videos` route upon successful login.
    * 6. If an error occurs during login, an error message is logged to the console, and a snackbar is shown to the user with a "Wrong Login data" message.
-   * 7. Finally, sets `common.loading` to `false` to indicate the end of the login process.
    *
    * @async
    * @returns {Promise<void>} A promise that resolves when the login process is complete.
    */
   async login() {
-    this.common.loading = true;
     try {
       const email = this.emailFormControl.value ?? '';
       const password = this.passwordFormControl.value ?? '';
@@ -120,7 +117,6 @@ export class LoginComponent {
       console.error(e);
       this.common.openSnackBar('Wrong Login data, please try again', 'OK');
     }
-    this.common.loading = false;
   }
 
   /**

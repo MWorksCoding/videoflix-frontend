@@ -28,7 +28,6 @@ export class HeaderComponent {
     private http: HttpClient,
     private location: Location
   ) {}
-  error: string = '';
 
   /**
    * Navigates the user to the login page.
@@ -57,6 +56,7 @@ export class HeaderComponent {
    */
   async logout() {
     try {
+      this.common.loading = true;
       const url = environment.baseUrl + '/logout/';
       let headers = new HttpHeaders();
       headers = headers.set(
@@ -67,10 +67,12 @@ export class HeaderComponent {
       localStorage.removeItem('token');
       localStorage.removeItem('user-Email');
       localStorage.removeItem('user-Id');
-      this.common.openSnackBar('Now your are logged out', 'OK');
+      this.common.loading = false;
+      this.common.openSnackBar('Now you are logged out', 'OK');
       this.router.navigateByUrl('/login');
     } catch (e) {
-      this.error = 'Error while logging out';
+      this.common.loading = false;
+      this.common.openSnackBar('Error while logging out', '');
     }
   }
 

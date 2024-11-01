@@ -115,6 +115,7 @@ export class PasswordResetComponent {
    */
   async resetPassword() {
     try {
+      this.common.loading = true;
       let url = environment.baseUrl + '/api/accounts/password/reset/verified/';
       let body = {
         code: this.code,
@@ -125,6 +126,7 @@ export class PasswordResetComponent {
       this.confirmPasswordFormControl = new FormControl('', [
         Validators.required,
       ]);
+      this.common.loading = false;
       this.common.openSnackBar(
         'Password reset was successfull. Now we redirect you to the login',
         ''
@@ -137,12 +139,11 @@ export class PasswordResetComponent {
         'Error resetting your password. Please try again later.',
         error
       );
-      setTimeout(() => {
-        this.common.openSnackBar(
-          'Error resetting your password. Please try again later.',
-          'OK'
-        );
-      }, 5000);
+      this.common.loading = false;
+      this.common.openSnackBar(
+        'Error resetting your password. Please try again later.',
+        'OK'
+      );
     }
   }
 

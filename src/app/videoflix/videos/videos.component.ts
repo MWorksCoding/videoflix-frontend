@@ -49,6 +49,7 @@ export class VideosComponent {
   currentResolution: string = '720p';
   animationState: string = 'visible';
   qualityInfoFlag: boolean = false;
+  videosLoading: boolean = false;
 
   qualities: any[] = [
     { value: '120p' },
@@ -90,12 +91,15 @@ export class VideosComponent {
    */
   async getVideos(): Promise<void> {
     try {
+      this.videosLoading = true;
       const url = environment.baseUrl + '/videos/';
       const response = await lastValueFrom(this.http.get(url));
       this.videos = response as any[];
       this.groupVideosByCategory();
-    } catch (error) {
-      console.error('Error fetching categories:', error);
+      this.videosLoading = false;
+    } catch (error : any) {
+      this.videosLoading = false;
+      this.common.openSnackBar('Error loading videos:', error)
     }
   }
 

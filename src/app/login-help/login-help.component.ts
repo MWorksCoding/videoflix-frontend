@@ -103,6 +103,7 @@ export class LoginHelpComponent {
    */
   async resetPassword() {
     try {
+      this.common.loading = true;
       let url = environment.baseUrl + '/api/accounts/password/reset/';
       let body = {
         email: this.emailFormControl.value,
@@ -112,6 +113,7 @@ export class LoginHelpComponent {
         Validators.required,
         Validators.email,
       ]);
+      this.common.loading = false;
       this.common.openSnackBar(
         'To reset your password use the link in the email we just sent you.',
         ''
@@ -121,12 +123,11 @@ export class LoginHelpComponent {
       }, 5000);
     } catch (error) {
       console.error('Error at password reset. Please try again later.', error);
-      setTimeout(() => {
-        this.common.openSnackBar(
-          'Error at password reset. Please try again later.',
-          'OK'
-        );
-      }, 5000);
+      this.common.loading = false;
+      this.common.openSnackBar(
+        'Error at password reset. Please try again later.',
+        'OK'
+      );
     }
   }
 }

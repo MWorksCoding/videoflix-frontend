@@ -1,9 +1,9 @@
 import { Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
-import { PrivacyComponent } from './videoflix/privacy/privacy.component';
+import { PrivacyComponent } from './shared/privacy/privacy.component';
 import { VideosComponent } from './videoflix/videos/videos.component';
-import { LegalNoticeComponent } from './videoflix/legal-notice/legal-notice.component';
+import { LegalNoticeComponent } from './shared/legal-notice/legal-notice.component';
 import { LoginHelpComponent } from './login-help/login-help.component';
 import { RegisterComponent } from './register/register.component';
 import { RegisterVerifiedComponent } from './register-verified/register-verified.component';

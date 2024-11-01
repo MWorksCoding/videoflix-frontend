@@ -115,6 +115,7 @@ export class RegisterComponent {
    */
   async registerUser() {
     try {
+      this.common.loading = true;
       let url = environment.baseUrl + '/api/accounts/signup/';
       let body = {
         email: this.emailFormControl.value,
@@ -129,6 +130,7 @@ export class RegisterComponent {
       this.confirmPasswordFormControl = new FormControl('', [
         Validators.required,
       ]);
+      this.common.loading = false;
       this.common.openSnackBar(
         'Please confirm your registration using the link in the email we just sent you.',
         ''
@@ -138,12 +140,11 @@ export class RegisterComponent {
       }, 5000);
     } catch (error) {
       console.error('Error at registration. Please try again later.', error);
-      setTimeout(() => {
-        this.common.openSnackBar(
-          'Error at registration. Please try again later.',
-          'OK'
-        );
-      }, 5000);
+      this.common.loading = false;
+      this.common.openSnackBar(
+        'Error at registration. Please try again later.',
+        'OK'
+      );
     }
   }
 

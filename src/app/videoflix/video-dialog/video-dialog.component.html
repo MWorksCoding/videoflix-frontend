@@ -1,4 +1,7 @@
-@if(videoUrl) {
-<video [src]="videoUrl" controls autoplay>
-</video>
-}
+@if (videoLoading) {
+<div class="loading-spinner">
+  <mat-spinner></mat-spinner>
+</div>
+} @else { @if(videoUrl) {
+<video [src]="videoUrl" controls autoplay></video>
+} }

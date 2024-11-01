@@ -2,7 +2,9 @@
 
 html,
 body {
+  background-color: black;
   height: 100%;
+  overflow-x: hidden;
 }
 body {
   margin: 0;
@@ -20,6 +22,11 @@ button {
   --mat-snack-bar-button-color: #ffffff;
   --mat-menu-item-label-text-color: #ffffff;
   --mat-menu-item-icon-color: #ffffff;
+}
+
+.mat-mdc-progress-spinner {
+  width: 35px !important;
+  height: 35px !important;
 }
 
 /* FONTS */

@@ -15,6 +15,7 @@ import { MaterialDesignModule } from '../../shared/material-design.module';
 export class VideoDialogComponent {
   video: any[] = [];
   videoUrl: any;
+  videoLoading: boolean = false
 
   constructor(
     public common: CommonService,
@@ -52,14 +53,17 @@ export class VideoDialogComponent {
    */
   async playVideo(): Promise<void> {
     try {
+      this.videoLoading = true
       const url = `${this.data.videodata}/`;
       const response = await lastValueFrom(
         this.http.get(url, { responseType: 'blob' })
       );
       const videoBlob = response as Blob;
+      this.videoLoading = false
       this.videoUrl = URL.createObjectURL(videoBlob);
-    } catch (error) {
-      console.error('Error fetching video:', error);
+    } catch (error: any) {
+      this.videoLoading = false
+      this.common.openSnackBar( 'Error fetching video:', error);
     }
   }
 }
