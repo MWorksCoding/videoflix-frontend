@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { MaterialDesignModule } from '../shared/material-design.module';
-import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import {
   animate,
@@ -9,11 +8,8 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
-import { HttpClient } from '@angular/common/http';
 import { CommonService } from '../services/common.service';
-import { ErrorStateMatcher } from '@angular/material/core';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
-import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-register-verified',

@@ -97,3 +97,9 @@
     padding: 43px 24px 43px 24px;
   }
 }
+
+@media(max-width: 550px) {
+  .login-card-div {
+    width: 95vw;
+  }
+}

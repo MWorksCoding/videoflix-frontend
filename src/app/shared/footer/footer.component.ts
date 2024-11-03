@@ -7,6 +7,7 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
+import { CommonService } from '../../services/common.service';
 
 @Component({
   selector: 'app-footer',
@@ -31,5 +32,7 @@ import {
   ],
 })
 export class FooterComponent {
-
+  constructor(
+    public common: CommonService,
+  ) {}
 }

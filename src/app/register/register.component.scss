@@ -48,8 +48,8 @@
   width: 100%;
 }
 
-::ng-deep .mat-mdc-form-field-infix {
-  width: 408px !important;
+::ng-deep .mat-mdc-form-field{
+  width: 100% !important;
 }
 
 .button-links {
@@ -75,5 +75,11 @@
   .login-card-div {
     width: 358px;
     padding: 43px 24px 43px 24px;
+  }
+}
+
+@media(max-width: 550px) {
+  .login-card-div {
+    width: 95vw;
   }
 }

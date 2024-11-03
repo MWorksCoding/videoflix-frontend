@@ -42,7 +42,7 @@
       <div class="button-links">
         <mat-card-actions>
           <button mat-raised-button type="submit" class="submit-button" [ngClass]="{'invalid-button': !isFormValid()}" [disabled]="!isFormValid()" (click)="registerUser()">
-            Get Started
+            <mat-icon class="material-symbols-outlined">start</mat-icon>Get Started
           </button>
         </mat-card-actions>
         @if (common.loading) {

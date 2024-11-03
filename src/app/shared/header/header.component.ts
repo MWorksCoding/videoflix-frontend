@@ -1,11 +1,4 @@
 import { Component } from '@angular/core';
-import {
-  animate,
-  state,
-  style,
-  transition,
-  trigger,
-} from '@angular/animations';
 import { Router } from '@angular/router';
 import { CommonService } from '../../services/common.service';
 import { MaterialDesignModule } from '../material-design.module';
@@ -28,16 +21,6 @@ export class HeaderComponent {
     private http: HttpClient,
     private location: Location
   ) {}
-
-  /**
-   * Navigates the user to the login page.
-   * This method uses the Angular `Router` to navigate the application to the `/login` route.
-   *
-   * @returns {void}
-   */
-  redirectToLogin(): void {
-    this.router.navigateByUrl('/login');
-  }
 
   /**
    * Asynchronously logs out the user by sending a logout request to the server.

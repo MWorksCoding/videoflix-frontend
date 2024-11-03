@@ -122,7 +122,6 @@ export class LoginHelpComponent {
         this.router.navigateByUrl('/login');
       }, 5000);
     } catch (error) {
-      console.error('Error at password reset. Please try again later.', error);
       this.common.loading = false;
       this.common.openSnackBar(
         'Error at password reset. Please try again later.',

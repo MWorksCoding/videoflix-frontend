@@ -9,7 +9,7 @@ import {
   trigger,
 } from '@angular/animations';
 import { CommonService } from '../services/common.service';
-import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+import { RouterOutlet, RouterLink, RouterLinkActive, Router } from '@angular/router';
 
 @Component({
   selector: 'app-not-found',
@@ -45,3 +45,4 @@ export class NotFoundComponent {
     this.common.component = 'login';
   }
 }
+

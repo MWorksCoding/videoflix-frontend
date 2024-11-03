@@ -1,16 +1,21 @@
 <div class="header">
   @if (common.component == "home" || common.component == "logout" ||
   common.component == "imprint-privacy") {
-  <div [@fadeInOut]>
+  <div>
     <img alt="Logo" src="../../../assets/img/Logo.svg" />
   </div>
   }@if (common.component == "videos") {
-  <div [@fadeInOut]>
+  <div>
     <img alt="Logo" src="../../../assets/img/Symbol.svg" />
   </div>
   } @if (common.component == "home") {
   <div class="text-signup">
-    <button mat-flat-button (click)="redirectToLogin()">Log In</button>
+    <button mat-flat-button (click)="common.redirectToLogin()">
+      <mat-icon class="material-symbols-outlined">login</mat-icon>Log In</button>
+  </div>
+} @if (common.component == "login") {
+  <div>
+    <img alt="Logo" src="../../../assets/img/Logo.svg" />
   </div>
   } @if (common.component == "videos") {
   <div class="text-signup">
@@ -25,8 +30,7 @@
   } @if (common.component == "imprint-privacy") {
   <div class="text-signup">
     <mat-icon (click)="goBack()" class="material-symbols-outlined"
-      >arrow_back</mat-icon
-    >
+      >arrow_back</mat-icon>
   </div>
   }
 </div>

@@ -28,9 +28,12 @@
     <div class="button-links">
       <mat-card-actions>
         <button mat-raised-button type="submit" class="submit-button" [ngClass]="{'invalid-button': !isFormValid()}" [disabled]="!isFormValid()" (click)="login()">
-          Login
+          <mat-icon class="material-symbols-outlined">login</mat-icon>Login
         </button>
       </mat-card-actions>
+      @if (common.loading) {
+        <mat-spinner></mat-spinner>
+      }
       <a [routerLink]="'/login-help'" mat-tab-link> Forgot password? </a>
       <div class="span-link">
         <span> New to Videoflix?</span>

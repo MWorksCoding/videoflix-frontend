@@ -12,16 +12,10 @@
   gap: 48px;
   position: sticky;
   bottom: 0px;
-  height: 108px;
+  height: 60px;
 
   a {
     color: #FFFFFF;
     text-decoration: none;
-  }
-}
-
-@media (max-width: 550px) {
-  .footer {
-    height: 60px;
   }
 }

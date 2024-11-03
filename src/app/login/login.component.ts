@@ -17,7 +17,6 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
-import { HttpClient } from '@angular/common/http';
 import { CommonService } from '../services/common.service';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
@@ -76,7 +75,6 @@ export class LoginComponent {
 
   constructor(
     private router: Router,
-    private http: HttpClient,
     private auth: AuthService,
     public common: CommonService
   ) {}
@@ -103,6 +101,7 @@ export class LoginComponent {
    */
   async login() {
     try {
+      this.common.loading = true;
       const email = this.emailFormControl.value ?? '';
       const password = this.passwordFormControl.value ?? '';
       let resp: any = await this.auth.loginWithEmailAndPassword(
@@ -112,9 +111,11 @@ export class LoginComponent {
       localStorage.setItem('token', resp.token);
       localStorage.setItem('user-Email', resp.email);
       localStorage.setItem('user-Id', resp.user_id);
+      this.common.loading = false;
       this.router.navigateByUrl('/videos');
     } catch (e) {
       console.error(e);
+      this.common.loading = false;
       this.common.openSnackBar('Wrong Login data, please try again', 'OK');
     }
   }

@@ -1,5 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -8,9 +9,12 @@ export class CommonService {
   component: string = 'home';
   existingEmail!: string | null;
   public _snackBar = inject(MatSnackBar);
-  loading: boolean = false
+  loading: boolean = false;
+  mobileView:boolean = false;
 
-  constructor() {}
+  constructor(
+    private router: Router
+  ) {}
 
   /**
    * Opens a snack bar (toast notification) with the provided message and action.
@@ -29,4 +33,14 @@ export class CommonService {
       duration: 3000,
     });
   }
+
+  /**
+   * Navigates the user to the login page.
+   * This method uses the Angular `Router` to navigate the application to the `/login` route.
+   *
+   * @returns {void}
+   */
+      redirectToLogin(): void {
+        this.router.navigateByUrl('/login');
+      }
 }
