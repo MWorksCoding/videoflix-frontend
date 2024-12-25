@@ -24,10 +24,10 @@
           <button mat-raised-button type="submit" class="submit-button" [ngClass]="{'invalid-button': emailFormControl.invalid}" [disabled]="emailFormControl.invalid" (click)="resetPassword()">
             Send Email
           </button>
+        </mat-card-actions>
           @if (common.loading) {
             <mat-spinner></mat-spinner>
           }
-        </mat-card-actions>
       </div>
     </mat-card>
   </div>

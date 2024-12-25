@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CommonService } from '../../services/common.service';
 import { MaterialDesignModule } from '../material-design.module';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -10,9 +10,9 @@ import { Location } from '@angular/common';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [MaterialDesignModule],
+  imports: [MaterialDesignModule, RouterLink],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.scss'
+  styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
   constructor(
@@ -66,5 +66,19 @@ export class HeaderComponent {
    */
   goBack(): void {
     this.location.back();
+  }
+
+  /**
+   * Navigates the user to the legal notice page
+   */
+  redirectToLegalNotice() {
+    this.router.navigateByUrl('/legal-notice');
+  }
+
+  /**
+   * Navigates the user to the privacy page.
+   */
+  redirectToPrivacy() {
+    this.router.navigateByUrl('/privacy');
   }
 }

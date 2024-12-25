@@ -22,7 +22,7 @@
     text-align: left;
     color: white;
     padding: 112px 32px 0px 32px;
-    width: 45%;
+    width: fit-content;
     color: #ffffff;
     display: flex;
     gap: 32px;
@@ -67,11 +67,12 @@
 }
 
 .videos-list {
+
   display: flex;
   flex-direction: column;
   margin: 0px 32px 0px 32px;
   padding: 6px;
-  height: 43vh;
+  height: 48vh;
   overflow: auto;
   div {
     color: #ffffff;

@@ -22,19 +22,33 @@
   display: flex;
 }
 
+.info-logout{
+  display: flex;
+  gap: 32px;
+}
+
+.buttons {
+  justify-content: flex-start;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
 mat-icon {
   color: white;
   width: 32px;
   height: 32px;
   font-size: 32px;
   cursor: pointer;
-  &:hover {
-    color: #2E3EDF;
-  }
 }
 
 @media (max-width: 550px) {
   .header {
     padding: 0 16px;
+  }
+
+  .info-logout{
+    display: flex;
+    gap: 16px;
   }
 }
